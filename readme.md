@@ -8,6 +8,9 @@ The official release of the `ChaoFactory` dataset and implementation of `Chaotic
 
 This dataset is a robust collection of sensor data from a complex, multi-input multi-output (MIMO) production line in a real industrial setting, specifically designed for machine learning applications in time-series prediction, anomaly detection, and system optimization.
 
+**Download**
+The data can be downloaded from [Google Drive](), please unzip and save it to the project directory.
+
 **Data Collection**
 
 - **Original File**: `BigDataFactory.csv` located at `ChaoFactoryDataset\BigDataFactory.csv`.
@@ -54,6 +57,7 @@ Activate the Conda environment using the following command:
 conda activate your_env
 ```
 
+
 ## 3. Model Execution
 
 ### Run Pre-Trained Model
@@ -79,10 +83,7 @@ python train.py
 
 - **Test Dataset Path**: `Opendata/dataset`
 
-## Usage
-
-The `ChaoFactory` dataset is ideal for developing predictive models that require high precision due to its non-cyclical and non-stationary nature. It is especially suited for applications in anomaly detection, predictive maintenance, and process optimization.
 
 ## Outreach
 
-We would love to address about questions during rebuttal!
+Thanks for the hardworking you put into the review! We would love to address about questions during rebuttal!
