@@ -3,7 +3,7 @@ from pykalman import KalmanFilter
 
 
 class KalmanFilter:
-
+    # Kalman filter implementation for data
     def __init__(self, process_variance, measurement_variance, estimated_measurement_variance):
         self.process_variance = process_variance
         self.measurement_variance = measurement_variance
@@ -12,7 +12,7 @@ class KalmanFilter:
         #Initial
         self.posteri_estimate = 0.0
         self.posteri_error_estimate = 1.0
-
+    # Kalman filter update
     def update(self, measurement):
         # Prediction update
         priori_estimate = self.posteri_estimate
@@ -25,10 +25,11 @@ class KalmanFilter:
         self.posteri_error_estimate = (1 - blending_factor) * priori_error_estimate
 
         return self.posteri_estimate
-    
+    # Kalman filter smooth
     def Kalman1D(observations,damping=1):
         # smoothed time series data
         observation_covariance = damping
+        # initial value guess
         initial_value_guess = observations[0]
         transition_matrix = 1
         transition_covariance = 0.1
@@ -40,6 +41,7 @@ class KalmanFilter:
                 transition_covariance=transition_covariance,
                 transition_matrices=transition_matrix
             )
+        # Kalman filter smooth
         pred_state, state_cov = kf.smooth(observations)
         return pred_state
     

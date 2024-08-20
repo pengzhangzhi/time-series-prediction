@@ -39,7 +39,7 @@ Before running the model, ensure all required dependencies are installed. Use th
    Create a new Conda environment to isolate your package installations:
 
    ```bash
-   conda create --name your_env python=3.10
+   conda create --name your_env python=3.8.10
    conda activate your_env
    ```
 3. **Install Required Packages**

@@ -1,6 +1,6 @@
 import torch
 import torch.nn as nn
-
+from mamba_ssm import Mamba
 class TimeSeriesModel(nn.Module):
     def __init__(self, num_features,num_out_features, num_timesteps, prediction_ts_size, hidden_dim,num_layers=5,nhead=4):
         super(TimeSeriesModel, self).__init__()
@@ -9,14 +9,21 @@ class TimeSeriesModel(nn.Module):
         self.num_out_features = num_out_features
         self.prediction_ts_size = prediction_ts_size
 
-        # Time CNN
+
+        # Time intergreation
         conv_block = [
             nn.Conv1d(in_channels=hidden_dim, out_channels=hidden_dim, kernel_size=3, padding=1),
             nn.ReLU(),
         ] * 3
         encoder_layer = nn.TransformerEncoderLayer(d_model=num_timesteps, nhead=nhead)
         self.transformer_encoder = nn.TransformerEncoder(encoder_layer, num_layers=num_layers)
-
+        
+        self.mamba = Mamba(
+            d_model=hidden_dim,  # Model dimension
+            d_state=64,  # SSM state expansion factor, typically 64 or 128
+            d_conv=4,    # Local convolution width
+            expand=1,    # Block expansion factor
+        )
 
         self.layers = nn.ModuleList(
             [
@@ -46,6 +53,5 @@ class TimeSeriesModel(nn.Module):
         
         x = x.permute(1,0,2)
         x = self.out_layers(x)
-
         return x
 
